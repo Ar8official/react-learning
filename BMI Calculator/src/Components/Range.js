@@ -15,7 +15,7 @@ class Range extends Component {
   }
 
   onChange(event){
-    console.log(event.target.value);
+    //console.log(event.target.value);
     this.props.onChange(this.state.value);
     this.setState({value:event.target.value});
   }
@@ -34,6 +34,12 @@ class Range extends Component {
       </div>
     );
   }
+}
+
+Range.propTypes = {
+  min: React.PropTypes.number.isRequired,
+  max: React.PropTypes.number.isRequired,
+  step: React.PropTypes.number.isRequired
 }
 
 export default Range;

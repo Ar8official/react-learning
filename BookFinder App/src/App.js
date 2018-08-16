@@ -3,6 +3,7 @@ import {Grid, Col, Row} from 'react-bootstrap';
 import axios from 'axios';
 import Header from './Components/Header';
 import Books from './Components/Books';
+import SearchInput from './Components/SearchInput';
 import './App.css';
 
 class App extends Component {
@@ -31,6 +32,10 @@ class App extends Component {
     });
   }
 
+  handleChange(text){
+    this.setState({text: text}, this.getBooks());
+  }
+
   render() {
     return (
       <div className="App">
@@ -38,6 +43,7 @@ class App extends Component {
         <Grid>
           <Row>
             <Col xs={12} md={12} lg={12}>
+              <SearchInput onChange={this.handleChange.bind(this)} value={this.state.text} />
               <Books books={this.state.books} />
             </Col>
           </Row>

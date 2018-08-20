@@ -47,6 +47,15 @@ class BarChart extends Component {
   render() {
     const chart = ReactFauxDOM.createElement('div');
 
+    let tooltip = d3.select('body').append('div')
+      .style('position', 'absolute')
+      .style('background', '#cccccc')
+      .style('opacity', '0')
+      .style('padding', '10px')
+      .style('border', '1px #000000 solid')
+      .style('border-radius', '5px')
+
+
     d3.select(chart).append('svg')
       .attr('width',this.props.width)
       .attr('height', this.props.height)
@@ -68,6 +77,17 @@ class BarChart extends Component {
           //return this.props.height - d;
           return this.props.height - this.state.yScale(d);
         })
+        .on('mouseover', (d) => {
+          tooltip.style('opacity', 1);
+          tooltip.html(d)
+            .style('left', (d3.event.pageX)+'px')
+            .style('top', (d3.event.pageY)+'px')
+        })
+        .on('mouseout', (d) => {
+          tooltip.style('opacity', 0);
+        })
+
+
     return chart.toReact();
   }
 }
